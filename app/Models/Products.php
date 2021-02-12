@@ -34,4 +34,9 @@ class Products extends Model
         ]);
     }
 
+    public static function getOutOfStockProducts()
+    {
+        return self::where(['amount' => 0])->get();
+    }
+
 }
