@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\ProductAddedMail;
 use App\Models\Products;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class AddNewProductCommand extends Command
 {
@@ -43,7 +45,7 @@ class AddNewProductCommand extends Command
         $amount = $this->argument('amount');
         $categoryId = $this->argument('categoryId');
         Products::addProduct($name, $price, $amount, $categoryId);
-
+        Mail::to('susicuros@gmail.com')->send(new ProductAddedMail($name, $price, $amount, $categoryId));
         return 0;
     }
 }

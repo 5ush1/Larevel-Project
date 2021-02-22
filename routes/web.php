@@ -35,7 +35,7 @@ Route::middleware('moderator.check')->group(function (){
 });
 
 
-Route::get('/',[ProductController::class, 'showCreateProductForm'])
+Route::view('/', 'homePage')
     ->name('home_page');
 Route::view("/user/contact", "user");
 Route::view("/user/about", "user");

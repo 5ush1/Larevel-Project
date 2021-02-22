@@ -39,7 +39,7 @@ class SendMailCommand extends Command
      */
     public function handle()
     {
-        Mail::to('tomislavnikolic1993@gmail.com')->send(new TestEmail());
+        Mail::to('susicuros@gmail.com')->send(new TestEmail());
         return 0;
     }
 }

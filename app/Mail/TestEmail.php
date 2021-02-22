@@ -28,6 +28,6 @@ class TestEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('tomislav.nikolic@quantox.com')->view('mail');
+        return $this->from('urossusic02@gmail.com')->view('mail');
     }
 }
