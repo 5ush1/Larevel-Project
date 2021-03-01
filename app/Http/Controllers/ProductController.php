@@ -3,13 +3,41 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\BuyRequest;
+use App\Http\Requests\CheckoutRequest;
 use App\Http\Requests\NewProductRequest;
+use App\Mail\OrderPlacedMail;
+use App\Mail\TodayOrdersMail;
+use App\Models\Orders;
 use App\Models\Products;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Console\Input\Input;
 
 
 class ProductController extends Controller
 {
+    public function buy(BuyRequest $request)
+    {
+        Orders::addNewOrder($request->name, $request->adress, $request->amount, $request->product_id);
+        $order = Orders::where(['product_id' => $request->product_id])->first();
+        Mail::to('susicuros@gmail.com')->send(new OrderPlacedMail($order));
+        Mail::to($request->email)->send(new OrderPlacedMail($order));
+        return redirect()->route('home_page');
+    }
+
+    public function checkout(CheckoutRequest $request)
+    {
+        $product_id = $request->product_id;
+        $product = Products::where(['id' => $product_id])->first();
+        return view('checkout', ['product' => $product]);
+    }
+    public function getRandomProduct()
+    {
+        $products = Products::randomProduct();
+        return view('homePage', ['products' => $products]);
+    }
 
     public function addNewProduct(NewProductRequest $request)
     {

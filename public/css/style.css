@@ -1,0 +1,27 @@
+.tefelmax{
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: 200;
+    font-size: 48px;
+    line-height: 56px;
+}
+.nav_height{
+    height: 125px;
+}
+.gray3{
+    background-color: #828282;
+}
+a{
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: italic;
+    color: black;
+}
+.bck_img{
+    background-image: url("images.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img_heigth{
+    height: 496px;
+}

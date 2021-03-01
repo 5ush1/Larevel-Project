@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Products extends Model
 {
@@ -38,5 +39,8 @@ class Products extends Model
     {
         return self::where(['amount' => 0])->get();
     }
-
+    public static function randomProduct()
+    {
+        return self::all()->random(4);
+    }
 }

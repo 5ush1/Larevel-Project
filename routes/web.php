@@ -35,7 +35,7 @@ Route::middleware('moderator.check')->group(function (){
 });
 
 
-Route::view('/', 'homePage')
+Route::get('/', [ProductController::class, 'getRandomProduct'])
     ->name('home_page');
 Route::view("/user/contact", "user");
 Route::view("/user/about", "user");
@@ -53,6 +53,10 @@ Route::get('/category/add', [CategoryController::class, 'showAddCategoryForm'])
     ->name('add_category');
 Route::post("/api/category/new", [CategoryController::class, 'addNewCategory'])
     ->name('api.add_new_category');
+Route::get('/checkout', [ProductController::class, 'checkout'])
+    ->name('checkout');
+Route::post('/buy', [ProductController::class, 'buy'])
+    ->name('buy');
 
 
 
