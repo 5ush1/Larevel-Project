@@ -9,10 +9,12 @@ use App\Http\Requests\NewProductRequest;
 use App\Mail\OrderPlacedMail;
 use App\Mail\TodayOrdersMail;
 use App\Models\Orders;
+use App\Models\Product_Images;
 use App\Models\Products;
 use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\Input;
 
 
@@ -45,8 +47,26 @@ class ProductController extends Controller
         $price = $request->get('price');
         $amount = $request->get('amount');
         $category_id = 1; // TODO: Dodati kategorije
+        if ($request->hasFile('photo'))
+        {
+            $photo = $request->file('photo');
+            $photoName = Str::random(32).'.'.$photo->getClientOriginalExtension();
+            $photo->move(public_path('/Images/Products/$product_id'), $photoName);
+        }
+        $product_id = Products::addProduct($name, $price, $amount, $category_id, $photoName);
 
-        Products::addProduct($name, $price, $amount, $category_id);
+
+        if ($request->hasFile('productImages'))
+        {
+            foreach ($request->file('productImages') as $image)
+            {
+                $imageName = Str::random(32).'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('/Images/Products/$product_id'), $imageName);
+                Product_Images::addImage($imageName, $product_id);
+            }
+        }
+
+
 
         return response()->json([
             'success' => true,

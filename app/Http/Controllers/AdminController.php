@@ -7,6 +7,12 @@ use App\Models\Products;
 
 class AdminController extends Controller
 {
+
+    public function viewProduct($name)
+    {
+        $product = Products::where(['name' => $name])->first();
+        return view('viewProduct', ['product' => $product]);
+    }
     public function index()
     {
         $products = Products::all();

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Integer;
 use phpDocumentor\Reflection\Types\Self_;
 
 class Products extends Model
@@ -15,7 +16,7 @@ class Products extends Model
     public $ime = "uros";
 
     protected $fillable = [
-        'name', 'price', 'amount', 'category_id'
+        'name', 'price', 'amount', 'category_id', 'cover_image'
     ];
 
     protected $table = self::TABLE_NAME;
@@ -25,14 +26,16 @@ class Products extends Model
         return $this->belongsTo(Categories::class, "category_id");
     }
 
-    public static function addProduct(string $name, int $price, int $amount, int $categoryId): void
+    public static function addProduct(string $name, int $price, int $amount, int $categoryId, string $photoName): int
     {
-        self::create([
+        $product = self::create([
             'name' => $name,
             'price' => $price,
             'amount' => $amount,
             'category_id'=> $categoryId,
+            'cover_image' => $photoName,
         ]);
+        return $product->id;
     }
 
     public static function getOutOfStockProducts()

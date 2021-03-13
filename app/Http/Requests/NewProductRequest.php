@@ -31,7 +31,8 @@ class NewProductRequest extends FormRequest
                 'max:64',
                 Rule::unique('products', 'name')
             ],
-            'price' => 'required|int|min:1'
+            'price' => 'required|int|min:1',
+            'photo' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:10000'
         ];
     }
 
