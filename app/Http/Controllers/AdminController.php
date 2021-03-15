@@ -15,7 +15,7 @@ class AdminController extends Controller
     }
     public function index()
     {
-        $products = Products::all();
+        $products = Products::all()->sortByDesc('featured');
         return view('admin', compact('products'));
     }
     public function editProduct(string $name)
