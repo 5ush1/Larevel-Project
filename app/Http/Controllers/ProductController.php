@@ -47,13 +47,15 @@ class ProductController extends Controller
         $price = $request->get('price');
         $amount = $request->get('amount');
         $category_id = 1; // TODO: Dodati kategorije
+        $featured = $request->get('featured');
         if ($request->hasFile('photo'))
         {
             $photo = $request->file('photo');
             $photoName = Str::random(32).'.'.$photo->getClientOriginalExtension();
             $photo->move(public_path('/Images/Products/$product_id'), $photoName);
         }
-        $product_id = Products::addProduct($name, $price, $amount, $category_id, $photoName);
+        $featured = $featured=="on"?true:null;
+        $product_id = Products::addProduct($name, $price, $amount, $category_id, $photoName, $featured);
 
 
         if ($request->hasFile('productImages'))

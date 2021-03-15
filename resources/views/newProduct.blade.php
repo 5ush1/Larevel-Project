@@ -19,6 +19,8 @@
         <input type="number" name="amount" id="amount" value="{{old("amount")}}">
         <input type="file" name="photo">
         <input type="file" name="productImages[]" multiple>
+        <label for="featured">Featured</label>
+        <input type="checkbox" name="featured">
 
         <button class="">Add</button>
     </form>

@@ -16,7 +16,7 @@ class Products extends Model
     public $ime = "uros";
 
     protected $fillable = [
-        'name', 'price', 'amount', 'category_id', 'cover_image'
+        'name', 'price', 'amount', 'category_id', 'cover_image','featured'
     ];
 
     protected $table = self::TABLE_NAME;
@@ -26,7 +26,7 @@ class Products extends Model
         return $this->belongsTo(Categories::class, "category_id");
     }
 
-    public static function addProduct(string $name, int $price, int $amount, int $categoryId, string $photoName): int
+    public static function addProduct(string $name, int $price, int $amount, int $categoryId, string $photoName, ?bool $featured): int
     {
         $product = self::create([
             'name' => $name,
@@ -34,6 +34,7 @@ class Products extends Model
             'amount' => $amount,
             'category_id'=> $categoryId,
             'cover_image' => $photoName,
+            'featured' => $featured,
         ]);
         return $product->id;
     }

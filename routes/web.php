@@ -23,8 +23,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('/admin', [AdminController::class, 'index'])
     ->name('admin')
     ->middleware('admin.check');
-Route::get('/admin/{name}', [AdminController::class, 'viewProduct'])
-    ->name('admin.view_product');
+
 
 Route::middleware('moderator.check')->group(function (){
     Route::view('/admin/new_product', 'newProduct');
@@ -64,7 +63,8 @@ Route::get('/pink', function (){
    event(new NewMessageEvent());
 });
 
-
+Route::get('/admin/{name}', [AdminController::class, 'viewProduct'])
+    ->name('admin.view_product');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
