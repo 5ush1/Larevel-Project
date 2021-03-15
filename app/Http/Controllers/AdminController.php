@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\MaintenanceLogs;
 use App\Models\Products;
 
 class AdminController extends Controller
 {
 
+
+    public function maintenanceLogs()
+    {
+        $logs = MaintenanceLogs::all()->sortByDesc('id');
+        return view('maintenance', ['logs' => $logs]);
+    }
     public function viewProduct($name)
     {
         $product = Products::where(['name' => $name])->first();

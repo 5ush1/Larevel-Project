@@ -35,8 +35,7 @@ Route::middleware('moderator.check')->group(function (){
         ->name('admin.delete_product');
 
 });
-
-
+Route::get('admin/maintenance', [AdminController::class, 'maintenanceLogs']);
 Route::get('/', [ProductController::class, 'getRandomProduct'])
     ->name('home_page');
 Route::view("/user/contact", "user");
