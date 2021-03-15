@@ -13,10 +13,10 @@ class CrateProductImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_images', function (Blueprint $table){
-           $table->id();
+        Schema::create('product_images', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('product_id')->constrained('products');
-           $table->string('name');
+            $table->string('name');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class AdminCheckMiddleware
     public function handle(Request $request, Closure $next)
     {
         $userId = Auth::id();
-        if ($userId && Role::isUserAdmin($userId)){
+        if ($userId && Role::isUserAdmin($userId)) {
             return $next($request);
         }
         return redirect(route('home_page'));

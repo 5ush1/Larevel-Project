@@ -1,5 +1,5 @@
 @extends("layout")
 
 @section('content')
-<p>{{ $product->name }}</p>
+    <p>{{ $product->name }}</p>
 @endsection

@@ -43,19 +43,17 @@ class DeleteOldProductsCommand extends Command
     {
         $this->info('started command');
         $products = Products::getOutOfStockProducts();
-        foreach ($products as $product)
-        {
-            DB::transaction(function () use ($product){
-               ProductLog::create([
-                  'product_id' => $product->id,
-                  'user_id' => 0,
-                  'action' => 'deleted',
-               ]);
-               $product->delete();
+        foreach ($products as $product) {
+            DB::transaction(function () use ($product) {
+                ProductLog::create([
+                    'product_id' => $product->id,
+                    'user_id' => 0,
+                    'action' => 'deleted',
+                ]);
+                $product->delete();
             });
         }
-        if (count($products) == 0)
-        {
+        if (count($products) == 0) {
             $this->error('Svih proizvoda ima na stanju');
         }
         $this->info('ended command');

@@ -39,15 +39,15 @@ class MaintenanceCommand extends Command
      */
     public function handle()
     {
-     $user_id = $this->argument('user_id');
-     $toggle = $this->argument('toggle');
-     $toggle = $toggle=='true'?true:false;
-     if ($toggle == true){
-         Artisan::call('down');
-     }else{
-         Artisan::call('up');
-     }
-     MaintenanceLogs::toggle($user_id, $toggle);
+        $user_id = $this->argument('user_id');
+        $toggle = $this->argument('toggle');
+        $toggle = $toggle == 'true' ? true : false;
+        if ($toggle == true) {
+            Artisan::call('down');
+        } else {
+            Artisan::call('up');
+        }
+        MaintenanceLogs::toggle($user_id, $toggle);
         return 0;
     }
 }

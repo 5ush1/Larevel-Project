@@ -35,6 +35,7 @@ class ProductController extends Controller
         $product = Products::where(['id' => $product_id])->first();
         return view('checkout', ['product' => $product]);
     }
+
     public function getRandomProduct()
     {
         $products = Products::randomProduct();
@@ -48,26 +49,22 @@ class ProductController extends Controller
         $amount = $request->get('amount');
         $category_id = 1; // TODO: Dodati kategorije
         $featured = $request->get('featured');
-        if ($request->hasFile('photo'))
-        {
+        if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
-            $photoName = Str::random(32).'.'.$photo->getClientOriginalExtension();
+            $photoName = Str::random(32) . '.' . $photo->getClientOriginalExtension();
             $photo->move(public_path('/Images/Products/$product_id'), $photoName);
         }
-        $featured = $featured=="on"?true:null;
+        $featured = $featured == "on" ? true : null;
         $product_id = Products::addProduct($name, $price, $amount, $category_id, $photoName, $featured);
 
 
-        if ($request->hasFile('productImages'))
-        {
-            foreach ($request->file('productImages') as $image)
-            {
-                $imageName = Str::random(32).'.'.$image->getClientOriginalExtension();
+        if ($request->hasFile('productImages')) {
+            foreach ($request->file('productImages') as $image) {
+                $imageName = Str::random(32) . '.' . $image->getClientOriginalExtension();
                 $image->move(public_path('/Images/Products/$product_id'), $imageName);
                 Product_Images::addImage($imageName, $product_id);
             }
         }
-
 
 
         return response()->json([
@@ -104,11 +101,11 @@ class ProductController extends Controller
             view('single_product', compact('product')) :
             redirect(route('home_page'));
     }
+
     public function showProductsTable()
     {
         $products = DB::table('products')->get('name');
-        foreach ($products as $product)
-        {
+        foreach ($products as $product) {
             echo "<li>" . $product->name . "</li>";
         }
     }

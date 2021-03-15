@@ -13,8 +13,8 @@ class MaintenanceLogs extends Model
     public static function toggle(int $user_id, bool $toggle): void
     {
         self::create([
-           'user_id' => $user_id,
-           'toggle' => $toggle,
+            'user_id' => $user_id,
+            'toggle' => $toggle,
         ]);
     }
 }

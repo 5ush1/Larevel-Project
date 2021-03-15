@@ -13,8 +13,8 @@ class Product_Images extends Model
     public static function addImage($name, $product_id)
     {
         self::create([
-           'name' => $name,
-           'product_id' => $product_id
+            'name' => $name,
+            'product_id' => $product_id
         ]);
     }
 }

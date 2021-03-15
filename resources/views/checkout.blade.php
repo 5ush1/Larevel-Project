@@ -3,7 +3,7 @@
 
     <form action="{{ route('buy') }}" method="post">
         @csrf
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
         <div>
             <label for="product">Product: </label>
             <input type="text" name="product" value="{{ $product->name }}" readonly>

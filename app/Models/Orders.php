@@ -10,11 +10,6 @@ class Orders extends Model
 {
     protected $fillable = ['fullName', 'address', 'amount', 'product_id'];
 
-    public function product()
-    {
-        return $this->hasOne(Products::class, 'id', 'product_id');
-    }
-
     /**
      * @param string $fullName
      * @param string $address
@@ -29,5 +24,10 @@ class Orders extends Model
             'amount' => $amount,
             'product_id' => $product_id,
         ]);
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Products::class, 'id', 'product_id');
     }
 }

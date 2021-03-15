@@ -13,6 +13,7 @@ class TodayOrdersMail extends Mailable
 
 
     public $orders;
+
     /**
      * Create a new message instance.
      *

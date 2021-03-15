@@ -1,6 +1,3 @@
-
-
-
 <table>
     <tr>
         <th>Ime</th>
@@ -11,13 +8,13 @@
     </tr>
 
     @foreach($orders as $order)
-    <tr>
-        <td>{{ $order->fullName }}</td>
-        <td>{{ $order->address }}</td>
-        <td>{{ $order->amount }}</td>
-        <td>{{ $order->amount * $order->product->price }}</td>
-        <td>{{ $order->product->name }}</td>
-    </tr>
+        <tr>
+            <td>{{ $order->fullName }}</td>
+            <td>{{ $order->address }}</td>
+            <td>{{ $order->amount }}</td>
+            <td>{{ $order->amount * $order->product->price }}</td>
+            <td>{{ $order->product->name }}</td>
+        </tr>
     @endforeach
 
 </table>

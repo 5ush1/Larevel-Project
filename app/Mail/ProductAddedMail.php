@@ -16,6 +16,7 @@ class ProductAddedMail extends Mailable
     public $price;
     public $amount;
     public $categoryId;
+
     /**
      * Create a new message instance.
      *

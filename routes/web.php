@@ -25,7 +25,7 @@ Route::get('/admin', [AdminController::class, 'index'])
     ->middleware('admin.check');
 
 
-Route::middleware('moderator.check')->group(function (){
+Route::middleware('moderator.check')->group(function () {
     Route::view('/admin/new_product', 'newProduct');
     Route::get('/admin/edit_product/{name}', [AdminController::class, 'editProduct'])
         ->name('admin.edit_product');
@@ -58,8 +58,8 @@ Route::get('/checkout', [ProductController::class, 'checkout'])
     ->name('checkout');
 Route::post('/buy', [ProductController::class, 'buy'])
     ->name('buy');
-Route::get('/pink', function (){
-   event(new NewMessageEvent());
+Route::get('/pink', function () {
+    event(new NewMessageEvent());
 });
 
 Route::get('/admin/{name}', [AdminController::class, 'viewProduct'])

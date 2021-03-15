@@ -6,18 +6,17 @@ $(document).ready(function () {
     var proizvodi = ["Jogurt", "Mleko"];
 
     var detaljiProizvoda = {
-        "Jogrt" : {
+        "Jogrt": {
             "cena": 500
         }
     };
 
-    for(proizvod in proizvodi)
-    {
+    for (proizvod in proizvodi) {
         // 0, 1
-        console.log( proizvodi[proizvod] )
+        console.log(proizvodi[proizvod])
     }
 
-    $('._addProduct').click(function (event){
+    $('._addProduct').click(function (event) {
         var ime = $('#name').val();
         var cena = $('#price').val();
         var kolicina = $('#amount').val();
@@ -34,9 +33,8 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function (response){
-                if(response['success'])
-                {
+            success: function (response) {
+                if (response['success']) {
                     alert("Uspesno ste dodali novi proizvod")
                 }
             }
@@ -46,7 +44,7 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $('.clickable_text').click(function (){
+    $('.clickable_text').click(function () {
         $(this).css('color', 'red');
     });
     $('._submit').click(function (event) {
@@ -58,19 +56,16 @@ $(document).ready(function () {
     $('._deleteProduct').click(function () {
         var id = $(this).attr('data-product-id');
         var element = $(this);
-        if (!$.isNumeric(id)){
+        if (!$.isNumeric(id)) {
             return false;
         }
         $.ajax({
-            url : '/admin/delete_product/'+id,
-            success: function(response) {
+            url: '/admin/delete_product/' + id,
+            success: function (response) {
                 $(element).parent().parent().hide();
             }
         });
     });
-
-
-
 
 
 });

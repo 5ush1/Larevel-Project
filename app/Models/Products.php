@@ -16,15 +16,10 @@ class Products extends Model
     public $ime = "uros";
 
     protected $fillable = [
-        'name', 'price', 'amount', 'category_id', 'cover_image','featured'
+        'name', 'price', 'amount', 'category_id', 'cover_image', 'featured'
     ];
 
     protected $table = self::TABLE_NAME;
-
-    public function category()
-    {
-        return $this->belongsTo(Categories::class, "category_id");
-    }
 
     public static function addProduct(string $name, int $price, int $amount, int $categoryId, string $photoName, ?bool $featured): int
     {
@@ -32,7 +27,7 @@ class Products extends Model
             'name' => $name,
             'price' => $price,
             'amount' => $amount,
-            'category_id'=> $categoryId,
+            'category_id' => $categoryId,
             'cover_image' => $photoName,
             'featured' => $featured,
         ]);
@@ -43,8 +38,14 @@ class Products extends Model
     {
         return self::where(['amount' => 0])->get();
     }
+
     public static function randomProduct()
     {
         return self::all()->random(4);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, "category_id");
     }
 }
